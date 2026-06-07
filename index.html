@@ -63,8 +63,11 @@
   .mhead .hg{font-size:16px;font-weight:800;line-height:1.15;}
   .mhead .hs{font-size:11px;font-weight:500;opacity:.8;margin-top:2px;}
   .mrule{height:1px;background:rgba(35,42,46,.25);margin:16px 2px;}
-  .mtitle{font-size:21px;font-weight:800;text-align:start;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+  .mtitle{font-size:21px;font-weight:800;text-align:start;margin-bottom:6px;display:flex;align-items:center;gap:9px;}
   .mtitle::before{content:'';width:5px;height:22px;border-radius:3px;background:var(--dark);display:inline-block;}
+  .msub{font-size:12.5px;font-weight:500;opacity:.78;text-align:start;margin:0 0 15px 14px;line-height:1.4;}
+  body.ar .msub{font-family:'Noto Kufi Arabic',sans-serif;margin:0 14px 15px 0;}
+  body.hi .msub{font-family:'Noto Sans Devanagari',sans-serif;}
 
   .list{display:flex;flex-direction:column;gap:11px;}
   .svc{display:flex;align-items:center;gap:13px;background:var(--cream);border:1px solid rgba(35,42,46,.09);
@@ -194,6 +197,7 @@
     </div>
     <div class="mrule"></div>
     <div class="mtitle" id="mTitle">Our Services</div>
+    <div class="msub" id="mSubtitle">Choose the service you need to get in touch with us</div>
     <div class="list" id="list"></div>
 
     <div class="pay">
@@ -284,7 +288,7 @@
   const T={
     en:{dir:'ltr',cls:'',m:'Good morning',a:'Good afternoon',e:'Good evening',n:'Hello',
       dear:'Dear Client',welcome:'Welcome to Al Fazaa — Road Side Assistance',f247:'Always at your service · Day & night',
-      choose:'Choose your language to discover our services',svc:'Our Services',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',invoice:'Don’t forget to ask for your invoice — you may need it later.',
+      choose:'Choose your language to discover our services',svc:'Our Services',subt:'Choose the service you need to get in touch with us',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',invoice:'Don’t forget to ask for your invoice — you may need it later.',
       safeT:'Your safety is our mission',safeB:'Even when you’re in a hurry, please drive consciously — your loved ones are waiting for you.',
       change:'Change language',locale:'en-GB',
       note:'Listed prices are starting rates and may vary depending on your area.',
@@ -298,7 +302,7 @@
       ]},
     ar:{dir:'rtl',cls:'ar rtl',m:'صباح الخير',a:'مساء الخير',e:'مساء الخير',n:'أهلاً وسهلاً',
       dear:'عميلنا العزيز',welcome:'مرحباً بك في الفزعة — المساعدة على الطريق',f247:'في خدمتك دائماً · ليلاً ونهاراً',
-      choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',invoice:'لا تنسَ طلب فاتورتك — فقد تحتاجها لاحقاً.',
+      choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',subt:'اختر الخدمة التي تحتاجها للتواصل معنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',invoice:'لا تنسَ طلب فاتورتك — فقد تحتاجها لاحقاً.',
       safeT:'سلامتك هي هدفنا',safeB:'حتى لو كنت مستعجلاً، قُد بوعي — فأحبّاؤك في انتظارك.',
       change:'تغيير اللغة',locale:'ar-QA',
       note:'الأسعار المذكورة تبدأ من هذه القيمة وقد تختلف حسب المنطقة.',
@@ -312,7 +316,7 @@
       ]},
     hi:{dir:'ltr',cls:'hi',m:'सुप्रभात',a:'नमस्कार',e:'शुभ संध्या',n:'नमस्ते',
       dear:'प्रिय ग्राहक',welcome:'अल फ़ज़ा में आपका स्वागत है — रोड साइड असिस्टेंस',f247:'हमेशा आपकी सेवा में · दिन-रात',
-      choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',invoice:'अपना बिल लेना न भूलें — बाद में ज़रूरत पड़ सकती है।',
+      choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',subt:'हमसे संपर्क करने के लिए सेवा चुनें',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',invoice:'अपना बिल लेना न भूलें — बाद में ज़रूरत पड़ सकती है।',
       safeT:'आपकी सुरक्षा हमारा लक्ष्य है',safeB:'जल्दी में हों तब भी सावधानी से गाड़ी चलाएँ — आपके अपने आपका इंतज़ार कर रहे हैं।',
       change:'भाषा बदलें',locale:'hi-IN',
       note:'दिए गए दाम शुरुआती हैं और आपके क्षेत्र के अनुसार बदल सकते हैं।',
@@ -326,7 +330,7 @@
       ]},
     fil:{dir:'ltr',cls:'',m:'Magandang umaga',a:'Magandang hapon',e:'Magandang gabi',n:'Magandang gabi',
       dear:'Mahal naming kliyente',welcome:'Maligayang pagdating sa Al Fazaa — Road Side Assistance',f247:'Lagi kang masisilbihan · Araw at gabi',
-      choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',invoice:'Huwag kalimutang hingin ang resibo — baka kailanganin mo ito.',
+      choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',subt:'Pumili ng serbisyo para makontak kami',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',invoice:'Huwag kalimutang hingin ang resibo — baka kailanganin mo ito.',
       safeT:'Ang kaligtasan mo ang misyon namin',safeB:'Kahit nagmamadali, magmaneho nang maingat — naghihintay sa iyo ang mga mahal mo sa buhay.',
       change:'Baguhin ang wika',locale:'en-GB',
       note:'Ang mga presyo ay panimula at maaaring magbago depende sa lugar.',
@@ -340,7 +344,7 @@
       ]},
     ru:{dir:'ltr',cls:'',m:'Доброе утро',a:'Добрый день',e:'Добрый вечер',n:'Здравствуйте',
       dear:'Уважаемый клиент',welcome:'Добро пожаловать в Al Fazaa — Помощь на дороге',f247:'Всегда к вашим услугам · День и ночь',
-      choose:'Выберите язык, чтобы узнать наши услуги',svc:'Наши услуги',cur:'QAR',from:'от',pay:'Мы принимаем',cash:'Наличные',invoice:'Не забудьте взять чек — он может вам понадобиться.',
+      choose:'Выберите язык, чтобы узнать наши услуги',svc:'Наши услуги',subt:'Выберите услугу, чтобы связаться с нами',cur:'QAR',from:'от',pay:'Мы принимаем',cash:'Наличные',invoice:'Не забудьте взять чек — он может вам понадобиться.',
       safeT:'Ваша безопасность — наша миссия',safeB:'Даже если вы спешите, ведите машину осознанно — близкие ждут вас.',
       change:'Сменить язык',locale:'ru-RU',
       note:'Указанные цены являются начальными и могут меняться в зависимости от района.',
@@ -354,7 +358,7 @@
       ]},
     fr:{dir:'ltr',cls:'',m:'Bonjour',a:'Bon après-midi',e:'Bonsoir',n:'Bonsoir',
       dear:'Cher client',welcome:'Bienvenue chez Al Fazaa — Assistance routière',f247:'Toujours à votre service · Jour et nuit',
-      choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',invoice:'N’oubliez pas de demander votre facture — vous pourriez en avoir besoin.',
+      choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',subt:'Choisissez le service souhaité pour nous contacter',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',invoice:'N’oubliez pas de demander votre facture — vous pourriez en avoir besoin.',
       safeT:'Votre sécurité est notre mission',safeB:'Même pressé, conduisez prudemment — vos proches vous attendent.',
       change:'Changer de langue',locale:'fr-FR',
       note:'Les prix indiqués sont des tarifs de départ et peuvent varier selon la zone.',
@@ -397,6 +401,7 @@
     document.getElementById('mGreet').textContent=t[bucket(dohaHour())];
     document.getElementById('mSub').textContent=t.dear;
     document.getElementById('mTitle').textContent=t.svc;
+    document.getElementById('mSubtitle').textContent=t.subt;
     document.getElementById('noteTxt').textContent=t.note;
     document.getElementById('payTitle').textContent=t.pay;
     document.getElementById('cashLbl').textContent=t.cash;
