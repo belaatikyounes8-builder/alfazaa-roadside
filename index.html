@@ -41,9 +41,15 @@
   .badge247 .sub{font-size:11px;font-weight:600;opacity:.92;line-height:1.2;text-align:start;}
   body.ar .badge247 .sub{font-family:'Noto Kufi Arabic',sans-serif;}
   body.hi .badge247 .sub{font-family:'Noto Sans Devanagari',sans-serif;}
-  .clock{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:11px;font-weight:600;
-    background:rgba(35,42,46,.14);border:1px solid rgba(35,42,46,.18);padding:7px 13px;border-radius:30px;}
-  .clock .dot{width:7px;height:7px;border-radius:50%;background:#2faa3f;box-shadow:0 0 0 3px rgba(47,170,63,.25);}
+  .clock{display:inline-flex;align-items:center;gap:10px;margin-top:15px;color:var(--dark);
+    background:rgba(255,255,255,.85);border:1px solid rgba(35,42,46,.14);padding:9px 16px;border-radius:30px;
+    box-shadow:0 6px 14px rgba(20,30,0,.14);}
+  .clock .dot{width:8px;height:8px;border-radius:50%;background:#2faa3f;box-shadow:0 0 0 3px rgba(47,170,63,.25);flex-shrink:0;}
+  .clock .ctime{font-size:16px;font-weight:800;letter-spacing:.4px;}
+  .clock .csep{width:1px;height:16px;background:rgba(35,42,46,.25);}
+  .clock .cdate{font-size:12.5px;font-weight:600;opacity:.82;}
+  body.ar .clock .cdate{font-family:'Noto Kufi Arabic',sans-serif;}
+  body.hi .clock .cdate{font-family:'Noto Sans Devanagari',sans-serif;}
   .rule{height:1px;background:rgba(35,42,46,.25);margin:20px 4px 16px;}
   .choose{font-size:12.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;opacity:.82;margin-bottom:14px;line-height:1.5;padding:0 6px;}
   .langs{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
@@ -176,7 +182,12 @@
       <span class="bsep"></span>
       <span class="sub" id="badge247">Always at your service · Day &amp; night</span>
     </div>
-    <div class="clock"><span class="dot"></span><span id="clock">Doha</span></div>
+    <div class="clock">
+      <span class="dot"></span>
+      <span class="ctime" id="clockTime">--:--</span>
+      <span class="csep"></span>
+      <span class="cdate" id="clockDate">Doha</span>
+    </div>
     <div class="rule"></div>
     <div class="choose" id="choose">Choose your language to discover our services</div>
     <div class="langs">
@@ -380,8 +391,9 @@
     const t=T[current];
     const time=new Intl.DateTimeFormat(t.locale,{timeZone:'Asia/Qatar',hour:'2-digit',minute:'2-digit'}).format(new Date());
     const date=new Intl.DateTimeFormat(t.locale,{timeZone:'Asia/Qatar',weekday:'long',day:'numeric',month:'long'}).format(new Date());
-    const city={en:'Doha',ar:'الدوحة',hi:'दोहा',fil:'Doha',fr:'Doha'}[current];
-    document.getElementById('clock').textContent=`${city} · ${time} · ${date}`;
+    const city={en:'Doha',ar:'الدوحة',hi:'दोहा',fil:'Doha',ru:'Доха',fr:'Doha'}[current];
+    document.getElementById('clockTime').textContent=time;
+    document.getElementById('clockDate').textContent=`${city} · ${date}`;
   }
 
   function renderWelcome(){
