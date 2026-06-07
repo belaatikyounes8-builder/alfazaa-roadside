@@ -33,6 +33,14 @@
   .greeting{font-size:29px;font-weight:800;line-height:1.15;}
   .dear{font-size:16px;font-weight:600;margin-top:4px;opacity:.9;}
   .welcome{font-size:12.5px;font-weight:500;margin-top:12px;opacity:.85;line-height:1.5;}
+  .badge247{display:inline-flex;align-items:center;gap:11px;margin-top:15px;background:var(--dark);color:#fff;
+    border-radius:30px;padding:9px 17px 9px 13px;box-shadow:0 8px 18px rgba(20,30,0,.28);}
+  .badge247 .num{display:inline-flex;align-items:center;gap:6px;font-size:17px;font-weight:900;color:#B9D400;letter-spacing:.4px;}
+  .badge247 .num svg{width:18px;height:18px;stroke:#B9D400;fill:none;}
+  .badge247 .bsep{width:1px;height:20px;background:rgba(255,255,255,.30);}
+  .badge247 .sub{font-size:11px;font-weight:600;opacity:.92;line-height:1.2;text-align:start;}
+  body.ar .badge247 .sub{font-family:'Noto Kufi Arabic',sans-serif;}
+  body.hi .badge247 .sub{font-family:'Noto Sans Devanagari',sans-serif;}
   .clock{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:11px;font-weight:600;
     background:rgba(35,42,46,.14);border:1px solid rgba(35,42,46,.18);padding:7px 13px;border-radius:30px;}
   .clock .dot{width:7px;height:7px;border-radius:50%;background:#2faa3f;box-shadow:0 0 0 3px rgba(47,170,63,.25);}
@@ -118,6 +126,11 @@
     <div class="greeting" id="greeting">Good evening</div>
     <div class="dear" id="dear">Dear Client</div>
     <div class="welcome" id="welcomeTxt">Welcome to Al Fazaa — Road Side Assistance</div>
+    <div class="badge247">
+      <span class="num"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>24/7</span>
+      <span class="bsep"></span>
+      <span class="sub" id="badge247">Always at your service · Day &amp; night</span>
+    </div>
     <div class="clock"><span class="dot"></span><span id="clock">Doha</span></div>
     <div class="rule"></div>
     <div class="choose" id="choose">Choose your language to discover our services</div>
@@ -183,7 +196,7 @@
 
   const T={
     en:{dir:'ltr',cls:'',m:'Good morning',a:'Good afternoon',e:'Good evening',n:'Hello',
-      dear:'Dear Client',welcome:'Welcome to Al Fazaa — Road Side Assistance',
+      dear:'Dear Client',welcome:'Welcome to Al Fazaa — Road Side Assistance',f247:'Always at your service · Day & night',
       choose:'Choose your language to discover our services',svc:'Our Services',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',
       safeT:'Your safety is our mission',safeB:'Even when you’re in a hurry, please drive consciously — your loved ones are waiting for you.',
       change:'Change language',locale:'en-GB',
@@ -197,7 +210,7 @@
         {nm:'Gear Release',ds:'All BMW & Mini Cooper models'}
       ]},
     ar:{dir:'rtl',cls:'ar rtl',m:'صباح الخير',a:'مساء الخير',e:'مساء الخير',n:'أهلاً وسهلاً',
-      dear:'عميلنا العزيز',welcome:'مرحباً بك في الفزعة — المساعدة على الطريق',
+      dear:'عميلنا العزيز',welcome:'مرحباً بك في الفزعة — المساعدة على الطريق',f247:'في خدمتك دائماً · ليلاً ونهاراً',
       choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',
       safeT:'سلامتك هي هدفنا',safeB:'حتى لو كنت مستعجلاً، قُد بوعي — فأحبّاؤك في انتظارك.',
       change:'تغيير اللغة',locale:'ar-QA',
@@ -211,7 +224,7 @@
         {nm:'تحرير ناقل الحركة',ds:'لجميع موديلات BMW و Mini Cooper'}
       ]},
     hi:{dir:'ltr',cls:'hi',m:'सुप्रभात',a:'नमस्कार',e:'शुभ संध्या',n:'नमस्ते',
-      dear:'प्रिय ग्राहक',welcome:'अल फ़ज़ा में आपका स्वागत है — रोड साइड असिस्टेंस',
+      dear:'प्रिय ग्राहक',welcome:'अल फ़ज़ा में आपका स्वागत है — रोड साइड असिस्टेंस',f247:'हमेशा आपकी सेवा में · दिन-रात',
       choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',
       safeT:'आपकी सुरक्षा हमारा लक्ष्य है',safeB:'जल्दी में हों तब भी सावधानी से गाड़ी चलाएँ — आपके अपने आपका इंतज़ार कर रहे हैं।',
       change:'भाषा बदलें',locale:'hi-IN',
@@ -225,7 +238,7 @@
         {nm:'गियर रिलीज़',ds:'सभी BMW और Mini Cooper मॉडल'}
       ]},
     fil:{dir:'ltr',cls:'',m:'Magandang umaga',a:'Magandang hapon',e:'Magandang gabi',n:'Magandang gabi',
-      dear:'Mahal naming kliyente',welcome:'Maligayang pagdating sa Al Fazaa — Road Side Assistance',
+      dear:'Mahal naming kliyente',welcome:'Maligayang pagdating sa Al Fazaa — Road Side Assistance',f247:'Lagi kang masisilbihan · Araw at gabi',
       choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',
       safeT:'Ang kaligtasan mo ang misyon namin',safeB:'Kahit nagmamadali, magmaneho nang maingat — naghihintay sa iyo ang mga mahal mo sa buhay.',
       change:'Baguhin ang wika',locale:'en-GB',
@@ -239,7 +252,7 @@
         {nm:'Gear Release',ds:'Lahat ng BMW & Mini Cooper'}
       ]},
     fr:{dir:'ltr',cls:'',m:'Bonjour',a:'Bon après-midi',e:'Bonsoir',n:'Bonsoir',
-      dear:'Cher client',welcome:'Bienvenue chez Al Fazaa — Assistance routière',
+      dear:'Cher client',welcome:'Bienvenue chez Al Fazaa — Assistance routière',f247:'Toujours à votre service · Jour et nuit',
       choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',
       safeT:'Votre sécurité est notre mission',safeB:'Même pressé, conduisez prudemment — vos proches vous attendent.',
       change:'Changer de langue',locale:'fr-FR',
@@ -271,6 +284,7 @@
     document.getElementById('greeting').textContent=t[bucket(dohaHour())];
     document.getElementById('dear').textContent=t.dear;
     document.getElementById('welcomeTxt').textContent=t.welcome;
+    document.getElementById('badge247').textContent=t.f247;
     document.getElementById('choose').textContent=t.choose;
     updateClock();
   }
