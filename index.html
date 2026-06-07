@@ -92,6 +92,11 @@
   .mc i:first-child{left:0;background:#EB001B;}
   .mc i:last-child{right:0;background:#F79E1B;mix-blend-mode:multiply;}
   .gP{color:#4285F4;font-size:14px;font-weight:900;}
+  .invoice{display:flex;gap:8px;align-items:flex-start;margin-top:11px;font-size:11px;font-weight:600;color:#33402f;line-height:1.45;text-align:start;}
+  .invoice svg{width:15px;height:15px;flex-shrink:0;margin-top:1px;stroke:var(--dark);fill:none;}
+  body.ar .invoice,body.hi .invoice{font-family:inherit;}
+  body.ar .invoice{font-family:'Noto Kufi Arabic',sans-serif;}
+  body.hi .invoice{font-family:'Noto Sans Devanagari',sans-serif;}
 
   .note{display:flex;gap:8px;align-items:flex-start;text-align:start;margin-top:16px;
     font-size:11px;font-weight:500;line-height:1.5;color:#33402f;
@@ -139,7 +144,8 @@
       <button class="lang" data-lang="en"><span class="flag">🇬🇧</span><span class="nm">English</span></button>
       <button class="lang" data-lang="hi"><span class="flag">🇮🇳</span><span class="nm">हिन्दी</span></button>
       <button class="lang" data-lang="fil"><span class="flag">🇵🇭</span><span class="nm">Filipino</span></button>
-      <button class="lang full" data-lang="fr"><span class="flag">🇫🇷</span><span class="nm">Français</span></button>
+      <button class="lang" data-lang="ru"><span class="flag">🇷🇺</span><span class="nm">Русский</span></button>
+      <button class="lang" data-lang="fr"><span class="flag">🇫🇷</span><span class="nm">Français</span></button>
     </div>
   </section>
 
@@ -161,6 +167,10 @@
         <span class="pchip"><svg width="15" height="17" viewBox="0 0 24 24" fill="#111"><path d="M16.36 12.6c.02 2.3 2 3.06 2.03 3.08-.02.05-.31 1.1-1.04 2.18-.63.93-1.29 1.84-2.33 1.86-1.02.02-1.35-.6-2.52-.6-1.17 0-1.53.58-2.5.62-1 .04-1.77-1-2.4-1.93-1.3-1.88-2.29-5.3-.96-7.6.66-1.16 1.84-1.9 3.12-1.92.98-.02 1.9.67 2.5.67.6 0 1.72-.83 2.9-.71.49.02 1.88.2 2.77 1.5-.07.05-1.65.96-1.63 2.87M14.6 6.6c.53-.64.89-1.53.79-2.42-.76.03-1.69.5-2.24 1.15-.49.56-.92 1.47-.8 2.33.85.06 1.71-.44 2.25-1.06"/></svg>Pay</span>
         <span class="pchip"><span class="gP">G</span>Pay</span>
         <span class="pchip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2e8b3d" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9v6M18 9v6" stroke-linecap="round"/></svg><span id="cashLbl">Cash</span></span>
+      </div>
+      <div class="invoice">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l3 3v17l-2.5-1.5L13 22l-2.5-1.5L8 22l-2.5-1.5L6 22V2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+        <span id="invoiceTxt"></span>
       </div>
     </div>
 
@@ -197,7 +207,7 @@
   const T={
     en:{dir:'ltr',cls:'',m:'Good morning',a:'Good afternoon',e:'Good evening',n:'Hello',
       dear:'Dear Client',welcome:'Welcome to Al Fazaa — Road Side Assistance',f247:'Always at your service · Day & night',
-      choose:'Choose your language to discover our services',svc:'Our Services',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',
+      choose:'Choose your language to discover our services',svc:'Our Services',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',invoice:'Don’t forget to ask for your invoice — you may need it later.',
       safeT:'Your safety is our mission',safeB:'Even when you’re in a hurry, please drive consciously — your loved ones are waiting for you.',
       change:'Change language',locale:'en-GB',
       note:'Listed prices are starting rates and may vary depending on your area.',
@@ -211,7 +221,7 @@
       ]},
     ar:{dir:'rtl',cls:'ar rtl',m:'صباح الخير',a:'مساء الخير',e:'مساء الخير',n:'أهلاً وسهلاً',
       dear:'عميلنا العزيز',welcome:'مرحباً بك في الفزعة — المساعدة على الطريق',f247:'في خدمتك دائماً · ليلاً ونهاراً',
-      choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',
+      choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',invoice:'لا تنسَ طلب فاتورتك — فقد تحتاجها لاحقاً.',
       safeT:'سلامتك هي هدفنا',safeB:'حتى لو كنت مستعجلاً، قُد بوعي — فأحبّاؤك في انتظارك.',
       change:'تغيير اللغة',locale:'ar-QA',
       note:'الأسعار المذكورة تبدأ من هذه القيمة وقد تختلف حسب المنطقة.',
@@ -225,7 +235,7 @@
       ]},
     hi:{dir:'ltr',cls:'hi',m:'सुप्रभात',a:'नमस्कार',e:'शुभ संध्या',n:'नमस्ते',
       dear:'प्रिय ग्राहक',welcome:'अल फ़ज़ा में आपका स्वागत है — रोड साइड असिस्टेंस',f247:'हमेशा आपकी सेवा में · दिन-रात',
-      choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',
+      choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',invoice:'अपना बिल लेना न भूलें — बाद में ज़रूरत पड़ सकती है।',
       safeT:'आपकी सुरक्षा हमारा लक्ष्य है',safeB:'जल्दी में हों तब भी सावधानी से गाड़ी चलाएँ — आपके अपने आपका इंतज़ार कर रहे हैं।',
       change:'भाषा बदलें',locale:'hi-IN',
       note:'दिए गए दाम शुरुआती हैं और आपके क्षेत्र के अनुसार बदल सकते हैं।',
@@ -239,7 +249,7 @@
       ]},
     fil:{dir:'ltr',cls:'',m:'Magandang umaga',a:'Magandang hapon',e:'Magandang gabi',n:'Magandang gabi',
       dear:'Mahal naming kliyente',welcome:'Maligayang pagdating sa Al Fazaa — Road Side Assistance',f247:'Lagi kang masisilbihan · Araw at gabi',
-      choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',
+      choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',invoice:'Huwag kalimutang hingin ang resibo — baka kailanganin mo ito.',
       safeT:'Ang kaligtasan mo ang misyon namin',safeB:'Kahit nagmamadali, magmaneho nang maingat — naghihintay sa iyo ang mga mahal mo sa buhay.',
       change:'Baguhin ang wika',locale:'en-GB',
       note:'Ang mga presyo ay panimula at maaaring magbago depende sa lugar.',
@@ -251,9 +261,23 @@
         {nm:'Fuel Delivery',ds:'QAR 20 gasolina + QAR 100 serbisyo'},
         {nm:'Gear Release',ds:'Lahat ng BMW & Mini Cooper'}
       ]},
+    ru:{dir:'ltr',cls:'',m:'Доброе утро',a:'Добрый день',e:'Добрый вечер',n:'Здравствуйте',
+      dear:'Уважаемый клиент',welcome:'Добро пожаловать в Al Fazaa — Помощь на дороге',f247:'Всегда к вашим услугам · День и ночь',
+      choose:'Выберите язык, чтобы узнать наши услуги',svc:'Наши услуги',cur:'QAR',from:'от',pay:'Мы принимаем',cash:'Наличные',invoice:'Не забудьте взять чек — он может вам понадобиться.',
+      safeT:'Ваша безопасность — наша миссия',safeB:'Даже если вы спешите, ведите машину осознанно — близкие ждут вас.',
+      change:'Сменить язык',locale:'ru-RU',
+      note:'Указанные цены являются начальными и могут меняться в зависимости от района.',
+      list:[
+        {nm:'Эвакуация при поломке',ds:'Помощь на месте или буксировка'},
+        {nm:'Вскрытие автомобиля',ds:'Откроем безопасно · нужен документ (ID)'},
+        {nm:'Замена шины',ds:'Требуется запасное колесо'},
+        {nm:'Запуск двигателя',ds:'Подзарядка севшего аккумулятора'},
+        {nm:'Доставка топлива',ds:'QAR 20 топливо + QAR 100 услуга'},
+        {nm:'Разблокировка КПП',ds:'Все модели BMW и Mini Cooper'}
+      ]},
     fr:{dir:'ltr',cls:'',m:'Bonjour',a:'Bon après-midi',e:'Bonsoir',n:'Bonsoir',
       dear:'Cher client',welcome:'Bienvenue chez Al Fazaa — Assistance routière',f247:'Toujours à votre service · Jour et nuit',
-      choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',
+      choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',invoice:'N’oubliez pas de demander votre facture — vous pourriez en avoir besoin.',
       safeT:'Votre sécurité est notre mission',safeB:'Même pressé, conduisez prudemment — vos proches vous attendent.',
       change:'Changer de langue',locale:'fr-FR',
       note:'Les prix indiqués sont des tarifs de départ et peuvent varier selon la zone.',
@@ -299,6 +323,7 @@
     document.getElementById('noteTxt').textContent=t.note;
     document.getElementById('payTitle').textContent=t.pay;
     document.getElementById('cashLbl').textContent=t.cash;
+    document.getElementById('invoiceTxt').textContent=t.invoice;
     document.getElementById('safeT').textContent=t.safeT;
     document.getElementById('safeB').textContent=t.safeB;
     document.getElementById('changeTxt').textContent=t.change;
