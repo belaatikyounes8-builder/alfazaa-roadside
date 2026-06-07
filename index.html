@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Al Fazaa — Road Side Assistance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  :root{--dark:#232A2E;--green-1:#A6C000;--green-2:#8AA800;--green-3:#6F8C00;--cream:#F6F0E2;}
+  html,body{min-height:100%;}
+  body{
+    font-family:'Montserrat',sans-serif;color:var(--dark);
+    min-height:100dvh;
+    background:linear-gradient(160deg,var(--green-1) 0%,var(--green-2) 50%,var(--green-3) 100%);
+    display:flex;align-items:center;justify-content:center;padding:22px 14px;position:relative;overflow-x:hidden;
+  }
+  body::before{content:'';position:fixed;inset:0;background:url("brand_horse.png") repeat;background-size:120px;opacity:.05;pointer-events:none;}
+
+  .card{
+    position:relative;z-index:2;width:100%;max-width:440px;
+    background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.35);border-radius:26px;box-shadow:0 24px 60px rgba(20,30,0,.30);
+    padding:28px 22px 30px;text-align:center;animation:rise .5s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .view[hidden]{display:none;}
+
+  /* ---------- WELCOME ---------- */
+  .logo{height:104px;width:auto;margin:2px auto 8px;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18));}
+  .greeting{font-size:29px;font-weight:800;line-height:1.15;}
+  .dear{font-size:16px;font-weight:600;margin-top:4px;opacity:.9;}
+  .welcome{font-size:12.5px;font-weight:500;margin-top:12px;opacity:.85;line-height:1.5;}
+  .clock{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:11px;font-weight:600;
+    background:rgba(35,42,46,.14);border:1px solid rgba(35,42,46,.18);padding:7px 13px;border-radius:30px;}
+  .clock .dot{width:7px;height:7px;border-radius:50%;background:#2faa3f;box-shadow:0 0 0 3px rgba(47,170,63,.25);}
+  .rule{height:1px;background:rgba(35,42,46,.25);margin:20px 4px 16px;}
+  .choose{font-size:12.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;opacity:.82;margin-bottom:14px;line-height:1.5;padding:0 6px;}
+  .langs{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  .lang{display:flex;align-items:center;gap:11px;justify-content:flex-start;background:var(--cream);
+    border:1px solid rgba(35,42,46,.10);border-radius:15px;padding:13px 14px;cursor:pointer;font-family:inherit;
+    box-shadow:0 6px 14px rgba(20,30,0,.16);transition:transform .15s,box-shadow .15s;}
+  .lang:active{transform:scale(.97);}
+  .lang:hover{box-shadow:0 10px 20px rgba(20,30,0,.22);}
+  .lang .flag{font-size:22px;line-height:1;}
+  .lang .nm{font-size:14px;font-weight:700;}
+  .lang.full{grid-column:1/-1;justify-content:center;}
+
+  /* ---------- MENU ---------- */
+  .mhead{display:flex;align-items:center;gap:13px;text-align:start;}
+  .mhead img{height:56px;width:auto;flex-shrink:0;}
+  .mhead .htxt{flex:1;min-width:0;}
+  .mhead .hg{font-size:16px;font-weight:800;line-height:1.15;}
+  .mhead .hs{font-size:11px;font-weight:500;opacity:.8;margin-top:2px;}
+  .mrule{height:1px;background:rgba(35,42,46,.25);margin:16px 2px;}
+  .mtitle{font-size:21px;font-weight:800;text-align:start;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+  .mtitle::before{content:'';width:5px;height:22px;border-radius:3px;background:var(--dark);display:inline-block;}
+
+  .list{display:flex;flex-direction:column;gap:11px;}
+  .svc{display:flex;align-items:center;gap:13px;background:var(--cream);border:1px solid rgba(35,42,46,.09);
+    border-radius:16px;padding:13px 15px;box-shadow:0 7px 16px rgba(20,30,0,.15);
+    animation:rise .4s ease both;}
+  .svc .ic{width:46px;height:46px;border-radius:13px;background:var(--dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .svc .ic svg{width:25px;height:25px;stroke:#B9D400;fill:none;}
+  .svc .info{flex:1;min-width:0;text-align:start;}
+  .svc .nm{font-size:14.5px;font-weight:700;line-height:1.2;}
+  .svc .ds{font-size:11px;color:#5b6266;margin-top:3px;line-height:1.35;}
+  .svc .pr{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;}
+  .svc .from{font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;opacity:.55;}
+  .svc .amt{font-size:16px;font-weight:800;white-space:nowrap;}
+  .svc .amt b{font-size:11px;font-weight:700;opacity:.75;}
+
+  .pay{margin-top:18px;text-align:start;}
+  .pay-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.72;margin-bottom:9px;}
+  .pays{display:flex;flex-wrap:wrap;gap:8px;}
+  .pchip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(35,42,46,.10);
+    border-radius:10px;padding:7px 11px;font-size:12px;font-weight:800;color:var(--dark);box-shadow:0 4px 10px rgba(20,30,0,.12);}
+  .pchip.visa{color:#1A1F71;font-style:italic;letter-spacing:.5px;font-size:14px;}
+  .pchip svg{display:block;}
+  .mc{position:relative;width:25px;height:16px;display:inline-block;}
+  .mc i{position:absolute;top:0;width:16px;height:16px;border-radius:50%;}
+  .mc i:first-child{left:0;background:#EB001B;}
+  .mc i:last-child{right:0;background:#F79E1B;mix-blend-mode:multiply;}
+  .gP{color:#4285F4;font-size:14px;font-weight:900;}
+
+  .note{display:flex;gap:8px;align-items:flex-start;text-align:start;margin-top:16px;
+    font-size:11px;font-weight:500;line-height:1.5;color:#33402f;
+    background:rgba(35,42,46,.10);border:1px solid rgba(35,42,46,.14);border-radius:12px;padding:11px 13px;}
+  .note svg{width:15px;height:15px;flex-shrink:0;margin-top:1px;stroke:var(--dark);fill:none;}
+
+  .safety{margin-top:14px;background:var(--dark);color:#fff;border-radius:16px;padding:14px 16px;display:flex;gap:13px;align-items:center;text-align:start;box-shadow:0 8px 20px rgba(20,30,0,.25);}
+  .safety svg{width:30px;height:30px;stroke:#B9D400;fill:none;flex-shrink:0;}
+  .safety .st{font-size:13px;font-weight:800;line-height:1.35;}
+  .safety .ss{font-size:11.5px;font-weight:500;opacity:.85;margin-top:3px;line-height:1.5;}
+  body.ar .safety .st,body.ar .safety .ss{font-family:'Noto Kufi Arabic',sans-serif;}
+  body.hi .safety .st,body.hi .safety .ss{font-family:'Noto Sans Devanagari',sans-serif;}
+
+  .change{margin-top:16px;display:inline-flex;align-items:center;gap:7px;background:none;border:none;color:var(--dark);
+    font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;opacity:.72;cursor:pointer;}
+  .change svg{width:15px;height:15px;stroke:var(--dark);fill:none;}
+
+  /* RTL / scripts */
+  body.rtl{direction:rtl;}
+  body.ar .greeting,body.ar .dear,body.ar .welcome,body.ar .choose,body.ar .lang .nm,
+  body.ar .mhead .hg,body.ar .mhead .hs,body.ar .mtitle,body.ar .svc .nm,body.ar .svc .ds,body.ar .note,body.ar .change{font-family:'Noto Kufi Arabic',sans-serif;}
+  body.hi .greeting,body.hi .dear,body.hi .welcome,body.hi .choose,
+  body.hi .mhead .hg,body.hi .mhead .hs,body.hi .mtitle,body.hi .svc .nm,body.hi .svc .ds,body.hi .note,body.hi .change{font-family:'Noto Sans Devanagari',sans-serif;}
+</style>
+</head>
+<body>
+<main class="card">
+
+  <!-- ===== WELCOME VIEW ===== -->
+  <section class="view" id="welcome">
+    <img class="logo" src="brand_mark.png" alt="Al Fazaa">
+    <div class="greeting" id="greeting">Good evening</div>
+    <div class="dear" id="dear">Dear Client</div>
+    <div class="welcome" id="welcomeTxt">Welcome to Al Fazaa — Road Side Assistance</div>
+    <div class="clock"><span class="dot"></span><span id="clock">Doha</span></div>
+    <div class="rule"></div>
+    <div class="choose" id="choose">Choose your language to discover our services</div>
+    <div class="langs">
+      <button class="lang" data-lang="ar"><span class="flag">🇶🇦</span><span class="nm">العربية</span></button>
+      <button class="lang" data-lang="en"><span class="flag">🇬🇧</span><span class="nm">English</span></button>
+      <button class="lang" data-lang="hi"><span class="flag">🇮🇳</span><span class="nm">हिन्दी</span></button>
+      <button class="lang" data-lang="fil"><span class="flag">🇵🇭</span><span class="nm">Filipino</span></button>
+      <button class="lang full" data-lang="fr"><span class="flag">🇫🇷</span><span class="nm">Français</span></button>
+    </div>
+  </section>
+
+  <!-- ===== MENU VIEW ===== -->
+  <section class="view" id="menu" hidden>
+    <div class="mhead">
+      <img src="brand_mark.png" alt="Al Fazaa">
+      <div class="htxt"><div class="hg" id="mGreet">Good morning</div><div class="hs" id="mSub">Dear Client</div></div>
+    </div>
+    <div class="mrule"></div>
+    <div class="mtitle" id="mTitle">Our Services</div>
+    <div class="list" id="list"></div>
+
+    <div class="pay">
+      <div class="pay-title" id="payTitle">We accept</div>
+      <div class="pays">
+        <span class="pchip visa">VISA</span>
+        <span class="pchip"><span class="mc"><i></i><i></i></span>Mastercard</span>
+        <span class="pchip"><svg width="15" height="17" viewBox="0 0 24 24" fill="#111"><path d="M16.36 12.6c.02 2.3 2 3.06 2.03 3.08-.02.05-.31 1.1-1.04 2.18-.63.93-1.29 1.84-2.33 1.86-1.02.02-1.35-.6-2.52-.6-1.17 0-1.53.58-2.5.62-1 .04-1.77-1-2.4-1.93-1.3-1.88-2.29-5.3-.96-7.6.66-1.16 1.84-1.9 3.12-1.92.98-.02 1.9.67 2.5.67.6 0 1.72-.83 2.9-.71.49.02 1.88.2 2.77 1.5-.07.05-1.65.96-1.63 2.87M14.6 6.6c.53-.64.89-1.53.79-2.42-.76.03-1.69.5-2.24 1.15-.49.56-.92 1.47-.8 2.33.85.06 1.71-.44 2.25-1.06"/></svg>Pay</span>
+        <span class="pchip"><span class="gP">G</span>Pay</span>
+        <span class="pchip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2e8b3d" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9v6M18 9v6" stroke-linecap="round"/></svg><span id="cashLbl">Cash</span></span>
+      </div>
+    </div>
+
+    <div class="note">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span id="noteTxt"></span>
+    </div>
+
+    <div class="safety">
+      <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.3-8.8C1.2 9.3 2.6 5.8 6 5.8c2 0 3.2 1.2 4 2.4.8-1.2 2-2.4 4-2.4 3.4 0 4.8 3.5 3.3 6.4C19 16.6 12 21 12 21z"/></svg>
+      <div><div class="st" id="safeT"></div><div class="ss" id="safeB"></div></div>
+    </div>
+
+    <button class="change" id="change" onclick="resetLang()">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+      <span id="changeTxt">Change language</span>
+    </button>
+  </section>
+
+</main>
+
+<script>
+  // service icons (index aligned)
+  const ICONS=[
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="M2 13h11v4.5M13 13V8h3.2L19 11v6.5"/><path d="M2 9h6"/></svg>',
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4"/><path d="M10.8 10.8 19 19M16 16l2-2M18 18l2-2"/></svg>',
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>',
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 10v4"/><path d="M10 9.5 8 12.5h3L9 15.5"/></svg>',
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16"/><path d="M3 21h11"/><path d="M13 8h3l2.2 2v6.2a1.6 1.6 0 0 1-3.2 0V12H13"/><path d="M6 8h5"/></svg>',
+    '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v10"/><path d="M12 12H7v5M12 12h5v5"/><circle cx="7" cy="18.5" r="1.3"/><circle cx="12" cy="18.5" r="1.3"/><circle cx="17" cy="18.5" r="1.3"/></svg>'
+  ];
+  const PRICES=[150,150,100,100,120,100];
+
+  const T={
+    en:{dir:'ltr',cls:'',m:'Good morning',a:'Good afternoon',e:'Good evening',n:'Hello',
+      dear:'Dear Client',welcome:'Welcome to Al Fazaa — Road Side Assistance',
+      choose:'Choose your language to discover our services',svc:'Our Services',cur:'QAR',from:'from',pay:'We accept',cash:'Cash',
+      safeT:'Your safety is our mission',safeB:'Even when you’re in a hurry, please drive consciously — your loved ones are waiting for you.',
+      change:'Change language',locale:'en-GB',
+      note:'Listed prices are starting rates and may vary depending on your area.',
+      list:[
+        {nm:'Breakdown Recovery',ds:'On-site help or towing to safety'},
+        {nm:'Car Lockout',ds:"We'll open your car safely · ID required"},
+        {nm:'Tyre Change',ds:'Spare tyre required'},
+        {nm:'Jump Start',ds:'Flat battery boost'},
+        {nm:'Fuel Delivery',ds:'QAR 20 fuel + QAR 100 service'},
+        {nm:'Gear Release',ds:'All BMW & Mini Cooper models'}
+      ]},
+    ar:{dir:'rtl',cls:'ar rtl',m:'صباح الخير',a:'مساء الخير',e:'مساء الخير',n:'أهلاً وسهلاً',
+      dear:'عميلنا العزيز',welcome:'مرحباً بك في الفزعة — المساعدة على الطريق',
+      choose:'اختر لغتك لاكتشاف خدماتنا',svc:'خدماتنا',cur:'ر.ق',from:'تبدأ من',pay:'طرق الدفع',cash:'نقداً',
+      safeT:'سلامتك هي هدفنا',safeB:'حتى لو كنت مستعجلاً، قُد بوعي — فأحبّاؤك في انتظارك.',
+      change:'تغيير اللغة',locale:'ar-QA',
+      note:'الأسعار المذكورة تبدأ من هذه القيمة وقد تختلف حسب المنطقة.',
+      list:[
+        {nm:'سحب الأعطال',ds:'مساعدة في الموقع أو سحب المركبة'},
+        {nm:'فتح السيارات',ds:'نفتح سيارتك بأمان · يلزم إثبات الهوية'},
+        {nm:'تبديل الإطار',ds:'يتطلب إطاراً احتياطياً'},
+        {nm:'شحن البطارية',ds:'تشغيل البطارية الفارغة'},
+        {nm:'توصيل الوقود',ds:'٢٠ ر.ق وقود + ١٠٠ ر.ق خدمة'},
+        {nm:'تحرير ناقل الحركة',ds:'لجميع موديلات BMW و Mini Cooper'}
+      ]},
+    hi:{dir:'ltr',cls:'hi',m:'सुप्रभात',a:'नमस्कार',e:'शुभ संध्या',n:'नमस्ते',
+      dear:'प्रिय ग्राहक',welcome:'अल फ़ज़ा में आपका स्वागत है — रोड साइड असिस्टेंस',
+      choose:'हमारी सेवाएँ जानने के लिए अपनी भाषा चुनें',svc:'हमारी सेवाएँ',cur:'QAR',from:'से',pay:'हम स्वीकार करते हैं',cash:'नकद',
+      safeT:'आपकी सुरक्षा हमारा लक्ष्य है',safeB:'जल्दी में हों तब भी सावधानी से गाड़ी चलाएँ — आपके अपने आपका इंतज़ार कर रहे हैं।',
+      change:'भाषा बदलें',locale:'hi-IN',
+      note:'दिए गए दाम शुरुआती हैं और आपके क्षेत्र के अनुसार बदल सकते हैं।',
+      list:[
+        {nm:'ब्रेकडाउन रिकवरी',ds:'मौके पर मदद या टोइंग'},
+        {nm:'कार लॉकआउट',ds:'हम सुरक्षित खोलेंगे · ID आवश्यक'},
+        {nm:'टायर बदलना',ds:'स्पेयर टायर आवश्यक'},
+        {nm:'जंप स्टार्ट',ds:'बैटरी बूस्ट'},
+        {nm:'ईंधन डिलीवरी',ds:'QAR 20 ईंधन + QAR 100 सेवा'},
+        {nm:'गियर रिलीज़',ds:'सभी BMW और Mini Cooper मॉडल'}
+      ]},
+    fil:{dir:'ltr',cls:'',m:'Magandang umaga',a:'Magandang hapon',e:'Magandang gabi',n:'Magandang gabi',
+      dear:'Mahal naming kliyente',welcome:'Maligayang pagdating sa Al Fazaa — Road Side Assistance',
+      choose:'Pumili ng wika upang makita ang aming serbisyo',svc:'Aming mga Serbisyo',cur:'QAR',from:'mula sa',pay:'Tinatanggap namin',cash:'Cash',
+      safeT:'Ang kaligtasan mo ang misyon namin',safeB:'Kahit nagmamadali, magmaneho nang maingat — naghihintay sa iyo ang mga mahal mo sa buhay.',
+      change:'Baguhin ang wika',locale:'en-GB',
+      note:'Ang mga presyo ay panimula at maaaring magbago depende sa lugar.',
+      list:[
+        {nm:'Breakdown Recovery',ds:'Tulong sa lugar o pag-tow'},
+        {nm:'Car Lockout',ds:'Bubuksan nang ligtas · kailangan ng ID'},
+        {nm:'Pagpalit ng Gulong',ds:'Kailangan ng spare tire'},
+        {nm:'Jump Start',ds:'Boost sa patay na baterya'},
+        {nm:'Fuel Delivery',ds:'QAR 20 gasolina + QAR 100 serbisyo'},
+        {nm:'Gear Release',ds:'Lahat ng BMW & Mini Cooper'}
+      ]},
+    fr:{dir:'ltr',cls:'',m:'Bonjour',a:'Bon après-midi',e:'Bonsoir',n:'Bonsoir',
+      dear:'Cher client',welcome:'Bienvenue chez Al Fazaa — Assistance routière',
+      choose:'Choisissez votre langue pour découvrir nos services',svc:'Nos services',cur:'QAR',from:'dès',pay:'Nous acceptons',cash:'Espèces',
+      safeT:'Votre sécurité est notre mission',safeB:'Même pressé, conduisez prudemment — vos proches vous attendent.',
+      change:'Changer de langue',locale:'fr-FR',
+      note:'Les prix indiqués sont des tarifs de départ et peuvent varier selon la zone.',
+      list:[
+        {nm:'Dépannage',ds:'Aide sur place ou remorquage'},
+        {nm:'Ouverture de voiture',ds:'Ouverture sécurisée · pièce d’identité requise'},
+        {nm:'Changement de pneu',ds:'Pneu de secours requis'},
+        {nm:'Démarrage batterie',ds:'Recharge batterie à plat'},
+        {nm:'Livraison de carburant',ds:'20 QAR carburant + 100 QAR service'},
+        {nm:'Déverrouillage de vitesse',ds:'Tous BMW & Mini Cooper'}
+      ]},
+  };
+
+  let current='en';
+  const dohaHour=()=>parseInt(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Qatar',hour:'2-digit',hour12:false}).format(new Date()),10)%24;
+  const bucket=h=>(h>=5&&h<12)?'m':(h>=12&&h<17)?'a':(h>=17&&h<21)?'e':'n';
+
+  function updateClock(){
+    const t=T[current];
+    const time=new Intl.DateTimeFormat(t.locale,{timeZone:'Asia/Qatar',hour:'2-digit',minute:'2-digit'}).format(new Date());
+    const date=new Intl.DateTimeFormat(t.locale,{timeZone:'Asia/Qatar',weekday:'long',day:'numeric',month:'long'}).format(new Date());
+    const city={en:'Doha',ar:'الدوحة',hi:'दोहा',fil:'Doha',fr:'Doha'}[current];
+    document.getElementById('clock').textContent=`${city} · ${time} · ${date}`;
+  }
+
+  function renderWelcome(){
+    const t=T['en'];
+    document.getElementById('greeting').textContent=t[bucket(dohaHour())];
+    document.getElementById('dear').textContent=t.dear;
+    document.getElementById('welcomeTxt').textContent=t.welcome;
+    document.getElementById('choose').textContent=t.choose;
+    updateClock();
+  }
+
+  function buildMenu(lang){
+    current=lang; const t=T[lang];
+    document.body.className=t.cls;
+    document.documentElement.lang=lang;
+    document.getElementById('mGreet').textContent=t[bucket(dohaHour())];
+    document.getElementById('mSub').textContent=t.dear;
+    document.getElementById('mTitle').textContent=t.svc;
+    document.getElementById('noteTxt').textContent=t.note;
+    document.getElementById('payTitle').textContent=t.pay;
+    document.getElementById('cashLbl').textContent=t.cash;
+    document.getElementById('safeT').textContent=t.safeT;
+    document.getElementById('safeB').textContent=t.safeB;
+    document.getElementById('changeTxt').textContent=t.change;
+    const html=t.list.map((s,i)=>{
+      const price = lang==='ar' ? `${PRICES[i]} <b>${t.cur}</b>` : `<b>${t.cur}</b> ${PRICES[i]}`;
+      return `<div class="svc" style="animation-delay:${i*55}ms">
+        <div class="ic">${ICONS[i]}</div>
+        <div class="info"><div class="nm">${s.nm}</div><div class="ds">${s.ds}</div></div>
+        <div class="pr"><div class="from">${t.from}</div><div class="amt">${price}</div></div>
+      </div>`;
+    }).join('');
+    document.getElementById('list').innerHTML=html;
+  }
+
+  document.querySelectorAll('.lang').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      buildMenu(btn.dataset.lang);
+      document.getElementById('welcome').hidden=true;
+      document.getElementById('menu').hidden=false;
+      window.scrollTo({top:0,behavior:'instant'});
+      document.querySelector('.card').scrollIntoView({block:'start'});
+    });
+  });
+
+  function resetLang(){
+    document.body.className='';
+    document.documentElement.lang='en';
+    current='en';
+    document.getElementById('menu').hidden=true;
+    document.getElementById('welcome').hidden=false;
+    renderWelcome();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  renderWelcome();
+  setInterval(()=>{ if(!document.getElementById('welcome').hidden) updateClock(); },15000);
+</script>
+</body>
+</html>
